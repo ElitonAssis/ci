@@ -1,3 +1,59 @@
-<form (submit)="sendData()">
+<form (submit)="sendData()" [formGroup]="formulario" class="col  d-flex  justify-content-center  align-items-center"
+    style="height: 90vh;">
+
+    <mat-card-content class="d-flex flex-column justify-content-center w-50">
+        <mat-card-header>
+            <mat-card-title>Formulário de cadastro</mat-card-title>
+        </mat-card-header>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Título</mat-label>
+            <input type="text" matInput placeholder="Placeholder" formControlName="titulo">
+
+            <mat-error *ngIf="formulario.get('titulo')?.invalid">
+                Nome é obrigatório.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>descricao</mat-label>
+            <input type="text" matInput placeholder="Placeholder" formControlName="descricao">
+
+            <mat-error *ngIf="formulario.get('descricao')?.invalid">
+                Nome é obrigatório.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>lancamento</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="lancamento" type="date">
+            <mat-error *ngIf="formulario.get('lancamento')?.invalid">
+                Nome é obrigatório.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>desenvolvedora</mat-label>
+            <input type="text" matInput placeholder="Placeholder" formControlName="desenvolvedora">
+
+            <mat-error *ngIf="formulario.get('desenvolvedora')?.invalid">
+                Nome é obrigatório.
+            </mat-error>
+        </mat-form-field>
+        <span class="col d-flex justify-content-end">
+            <button (click)="openBottomSheet()" type="button" class="btn btn-success">
+                <mat-icon>add</mat-icon>
+            </button>
+
+        </span>
+        <mat-list>
+            <li *ngFor="let obj of formulario.value?.genero; let i = index"
+                class="border shadow mt-1 d-flex justify-content-between align-items-center p-2 h6">
+                <span>{{obj.nome}}</span>
+                <button (click)="removeFromArray(i);" class="btn btn-danger">x</button>
+            </li>
+        </mat-list>
+        <button [disabled]="formulario.invalid" class="btn btn-success">Enviar</button>
+    </mat-card-content>
 
 </form>

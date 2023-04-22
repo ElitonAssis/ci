@@ -1,0 +1,24 @@
+{
+    "animals": [
+        {
+            "id": 1,
+            "name": "eliton",
+            "type": "human"
+        },
+        {
+            "id": 2,
+            "name": "vitor",
+            "type": "macaco"
+        },
+        {
+            "id": 3,
+            "name": "igor",
+            "type": "human"
+        },
+        {
+            "id": 4,
+            "name": "elisa",
+            "type": "human"
+        }
+    ]
+}

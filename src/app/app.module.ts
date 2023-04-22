@@ -12,7 +12,6 @@ import { GameModule } from './game/game.module';
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -20,7 +19,8 @@ import { GameModule } from './game/game.module';
     AppRoutingModule,
     HttpClientModule,
     HomeModule,
-    GameModule
+    GameModule,
+
 
   ],
   providers: [],

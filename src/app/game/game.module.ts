@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { GameRoutingModule } from './game-routing.module';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import { MaterialModule } from '../modules/material/material.module';
+import { GeneroComponent } from './genero/genero.component';
 
 
 @NgModule({
   declarations: [
-    CadastroComponent
+    CadastroComponent,
+    GeneroComponent
   ],
   imports: [
     CommonModule,
-    GameRoutingModule
+    GameRoutingModule,
+    MaterialModule
   ]
 })
 export class GameModule { }

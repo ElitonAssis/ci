@@ -1,0 +1,39 @@
+<!-- <mat-toolbar color="primary">
+    <span>Cadastrar genero(s)</span>
+</mat-toolbar> -->
+<mat-card-content class="w-100 d-flex flex-column align-items-center">
+
+    <form (submit)="newGender()" [formGroup]="formulario" class="w-100 d-flex flex-column align-items-center">
+        <mat-form-field class="w-100">
+            <input matInput #Input placeholder="Cadastrar novo gênero" formControlName="nome">
+            <button matSuffix class="btn btn-success">
+                adicionar
+            </button>
+            <mat-error *ngIf="formulario.get('nome')?.invalid">
+                Valor inválido.
+            </mat-error>
+        </mat-form-field>
+    </form>
+
+
+    <mat-card-content class="w-100 border mt-5 p-1">
+        <mat-card-header class="d-flex justify-content-center">
+            <h6>Lista de gêneros cadastrados</h6>
+        </mat-card-header>
+        <span class="d-flex justify-content-end">
+            <button *ngIf="ret.length>0" (click)="close()" class="btn btn-sm btn-primary">selecionar</button>
+        </span>
+        <mat-list class="w-100 mt-2">
+            <li *ngFor="let obj of list; let i = index"
+                class=" d-flex justify-content-between align-items-center shadow border mt-1 h6 p-2 pointer"
+                [class]="includes(obj) ? 'selected':''" (click)="selectGenders(obj)">
+                <label> {{obj?.nome}}</label>
+
+                <button (click)="deleteOflist(obj?.id)" mat-mini-fab color="warn">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </li>
+        </mat-list>
+    </mat-card-content>
+
+</mat-card-content>

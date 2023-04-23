@@ -8,13 +8,15 @@ import { GeneroComponent } from './genero/genero.component';
 import { WokrflowComponent } from './wokrflow/wokrflow.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EditComponent } from './edit/edit.component';
+import { ModalEditComponent } from './edit/modal-edit/modal-edit.component';
 
 @NgModule({
   declarations: [
     CadastroComponent,
     GeneroComponent,
     WokrflowComponent,
-    EditComponent
+    EditComponent,
+    ModalEditComponent
   ],
   imports: [
     CommonModule,

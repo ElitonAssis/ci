@@ -35,5 +35,8 @@ export class GameService implements OnInit, OnDestroy {
   async getCategoriaList(id: number) {
     return this.http.get(`/game/get-categoria/${id}`);
   }
+  async removeCategory(obj: any) {
+    return this.http.post(`/game/remove-category`, obj);
+  }
 
 }

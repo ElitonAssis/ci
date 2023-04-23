@@ -10,7 +10,7 @@ export class GameCadastro extends BaseModel {
     titulo?: string
     descricao?: string
     lancamento?: Date
-    categoriaEntityList?: Set<GeneroIT>
+    categoriaEntityList?: Array<GeneroIT>
     desenvolvedora?: string;
     generos?: any
 }

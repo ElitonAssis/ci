@@ -16,30 +16,27 @@ export class WokrflowComponent implements OnInit {
     public dialog: MatDialog
   ) { }
   ngOnInit(): void {
-    console.log('sdaaaaaaaaaaaaaaaaaaaaaaaaaa')
     this.getAll();
   }
-  carouselConfig = {
-    infinite: true,
-    /* outras configurações do Slick Carousel */
-  };
 
-  async getAll() {
-
-    await this.service.getAll().then(res => {
-      res.subscribe(r => {
-        this.listaGame = r as Map<string, Array<GameCadastro>>;
-        console.log(this.listaGame);
-      })
-    })
-  }
+  async getAll() { await this.service.getAll().then(res => res.subscribe(r => this.listaGame = r as Map<string, Array<GameCadastro>>)) }
 
   openModal(obj: GameCadastro) {
-    console.log(obj)
+
     return this.dialog.open(EditComponent, {
       data: obj,
       width: "80vw",
       height: "80vh"
-    },)
+    },).afterClosed().subscribe(res => {
+      this.getAll();
+      //this.removeDeletado(this.listaGame, res)
+    })
   }
+
+
+  // private removeDeletado(lista: Map<string, Array<GameCadastro>>, deletadoId?: number) {
+  //   return Object.entries(lista)
+  //     .forEach(([key, value]) => Array.from(value)
+  //       .forEach(obj => obj instanceof GameCadastro ? value.splice(value.findIndex(obj.id == deletadoId), 1) : null))
+  // }
 }

@@ -1,27 +1,30 @@
-<mat-card class="w-100 h-100  overflow-auto scrollable-div  grad">
+<mat-card class="w-100 vh-100  overflow-auto scrollable-div  bg-dark">
     <mat-card-content *ngFor="let obj of listaGame |keyvalue ; let i = index " class="d-flex flex-column mt-5">
         <h5 style="display: block;" class="text-white">{{obj.key|uppercase}}</h5>
         <!-- [style]="i%2==0? 'background-color:rgba(51, 51, 51, 1);':''" -->
         <div class="w-100 d-flex flex-row overflow-auto ml-4 scrollable-div ">
             <mat-card *ngFor="let item of obj?.value" (click)="openModal(item)"
-                class="shadow border rounded m-2  pointer  col">
-                <mat-card-content class="game-card ">
+                class="shadow border rounded m-2 pointer w-25">
+                <mat-card-content class="d-flex flex-column justify-content-between h-100">
                     <mat-card-header>
                         <mat-card-title-group>
                             <mat-card-title> {{item?.titulo||"- - - - -"}}</mat-card-title>
                             <mat-card-subtitle>{{item?.desenvolvedora||"- - - - -"}}</mat-card-subtitle>
                         </mat-card-title-group>
                     </mat-card-header>
-                    <mat-card-content>
+
+                    <mat-card-content class="">
                         <small>
                             {{item?.descricao||"- - - - -"}}
                         </small>
                     </mat-card-content>
+
                     <mat-card-footer>
                         <mat-card-subtitle>
                             lançamento:{{item?.lancamento|date:"dd/MM/yyyy"}}
                         </mat-card-subtitle>
                     </mat-card-footer>
+
                 </mat-card-content>
             </mat-card>
         </div>

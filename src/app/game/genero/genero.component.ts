@@ -3,6 +3,7 @@ import { GeneroIT } from '../model/game';
 import { GeneroService } from 'src/app/services/genero.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { SnackService } from 'src/app/services/snack.service';
 
 @Component({
   selector: 'app-genero',
@@ -14,8 +15,6 @@ export class GeneroComponent implements OnInit {
   formulario!: FormGroup
   ret: Array<GeneroIT> = []
   ngOnInit(): void {
-
-    console.log('open')
     this.createForm();
     this.getAll();
 
@@ -23,7 +22,8 @@ export class GeneroComponent implements OnInit {
   constructor(
     private service: GeneroService,
     private formBuilder: FormBuilder,
-    private _bottomSheetRef: MatBottomSheetRef<GeneroComponent>
+    private _bottomSheetRef: MatBottomSheetRef<GeneroComponent>,
+    private snack: SnackService
   ) { }
 
   createForm() {
@@ -36,33 +36,23 @@ export class GeneroComponent implements OnInit {
     if (this.formulario.invalid) return;
     console.log(this.formulario.value)
     await this.service.sendData(this.formulario.value as GeneroIT).then(res => {
-
-      res.subscribe(response => {
-        console.log(response, "genero")
-      })
-    });
+      res.subscribe(response => this.snack.open(response.message, "verde"))
+    }).finally(() => this.formulario.get('nome')?.setValue(""));
   }
 
   async getAll() {
-    await this.service.getAll().then(res => {
-      console.log(res)
-      res.subscribe(response => {
-
-        console.log(response, 'getall')
-        if (response.error) return;
-        console.log(typeof response)
-        this.list = response;
-      })
+    await this.service.getAll().then(res => res.subscribe(response => {
+      if (response.error) return;
+      return this.list = response;
     })
+    )
   }
 
   async deleteOflist(id: number | undefined) {
     if (id === undefined) return;
 
     await this.service.deleteObj(id).then(res => {
-      res.subscribe(response => {
-        console.log(response)
-      })
+      res.subscribe(response => this.snack.open(response.message, "verde"))
     }).finally(() => this.getAll());
   }
 

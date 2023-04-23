@@ -4,6 +4,7 @@ import { GameService } from 'src/app/services/game.service';
 import { GameCadastro, GeneroIT } from '../model/game';
 import { response } from 'express';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
+import { SnackService } from 'src/app/services/snack.service';
 
 @Component({
   selector: 'app-edit',
@@ -14,7 +15,7 @@ export class EditComponent implements OnInit {
   categorias!: Array<GeneroIT>
   constructor(
     public modalEdit: MatDialog,
-
+    private snack: SnackService,
     private service: GameService,
     public dialogRef: MatDialogRef<EditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: GameCadastro,
@@ -27,23 +28,17 @@ export class EditComponent implements OnInit {
 
   deleteObj() {
     if (!!this.data)
-      this.service.deleteObj(this.data).then(res => {
-        res.subscribe(response => {
-          console.log(response)
-        })
-      })
+      this.service.deleteObj(this.data).then(res => res
+        .subscribe(response => this.snack.open(response.message, "verde")))
+        .finally(() => this.dialogRef.close(this.data.id))
   }
   async getCategoriaList() {
     if (!!this.data.id)
       this.service.getCategoriaList(this.data?.id).then(res => {
-        res.subscribe(response => {
-          console.log(response)
-          this.categorias = response;
-        })
+        if (!!res)
+          res.subscribe(response => this.categorias = response)
       });
   }
-
-
 
   openModal() {
     this.data.categoriaEntityList = this.categorias;
@@ -52,7 +47,6 @@ export class EditComponent implements OnInit {
       width: "80vw",
       height: "80vh",
       disableClose: true
-
     },)
   }
 }

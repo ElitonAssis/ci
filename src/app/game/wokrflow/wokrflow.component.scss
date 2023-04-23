@@ -1,11 +1,22 @@
+.grad {
+    //background-image: linear-gradient(180deg, #3F51B5, #293B9E, #192985, #14215F, #0C1338 );
+    background-image: linear-gradient(180deg, #0C1338, #14215F, #192985, #293B9E, #3F51B5);
+    background-attachment: fixed;
+    // background-color: aqua;
+
+}
+
 .pointer {
     cursor: pointer;
+    background-color: rgba(121, 121, 121, 0.659);
+    color: white;
 }
 
 .pointer:hover {
-    transition: 300ms;
-    background-color: rgba(121, 121, 121, 0.659);
-    color: white;
+    transition: 500ms;
+    background-color: #f1f1f1;
+    color: black;
+
 }
 
 .game-card {}

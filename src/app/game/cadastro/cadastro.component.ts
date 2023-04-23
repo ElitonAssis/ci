@@ -1,10 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GameCadastro, GeneroIT } from '../model/game';
 import { GameService } from 'src/app/services/game.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { GeneroComponent } from '../genero/genero.component';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -18,13 +17,11 @@ export class CadastroComponent implements OnInit {
     private formbuilder: FormBuilder,
     private gameService: GameService,
     private _bottomSheet: MatBottomSheet,
-    public dialogRef: MatDialogRef<CadastroComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
 
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data);
+
     this.createForm();
 
   }
@@ -45,11 +42,11 @@ export class CadastroComponent implements OnInit {
 
   createForm() {
     this.formulario = this.formbuilder.group({
-      titulo: ['teste', [Validators.required, Validators.pattern(/^[^!@#$%¨&*]+$/)]],
-      descricao: ['teste', [Validators.required, Validators.pattern(/^[^!@#$%¨&*]+$/)]],
+      titulo: ['', [Validators.required, Validators.pattern(/^[^!@#$%¨&*]+$/)]],
+      descricao: ['', [Validators.required, Validators.pattern(/^[^!@#$%¨&*]+$/)]],
       lancamento: [null, [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
       categoriaEntityList: [[], Validators.required],
-      desenvolvedora: ['teste', [Validators.required, Validators.pattern(/^[^!@#$%¨&*]+$/)]]
+      desenvolvedora: ['', [Validators.required, Validators.pattern(/^[^!@#$%¨&*]+$/)]]
     })
   }
   openBottomSheet(): void {

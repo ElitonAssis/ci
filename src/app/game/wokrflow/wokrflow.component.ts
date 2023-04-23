@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { GameCadastro } from '../model/game';
 import { MatDialog } from '@angular/material/dialog';
-import { CadastroComponent } from '../cadastro/cadastro.component';
+import { EditComponent } from '../edit/edit.component';
 @Component({
   selector: 'app-wokrflow',
   templateUrl: './wokrflow.component.html',
@@ -35,7 +35,8 @@ export class WokrflowComponent implements OnInit {
   }
 
   openModal(obj: GameCadastro) {
-    return this.dialog.open(CadastroComponent, {
+    console.log(obj)
+    return this.dialog.open(EditComponent, {
       data: obj,
       width: "80vw",
       height: "80vh"

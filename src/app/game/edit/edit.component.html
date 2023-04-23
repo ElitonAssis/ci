@@ -1,0 +1,34 @@
+<mat-card class="w-100 h-100 bg-dark overflow-auto scrollable-div ">
+    <span class="w-100 d-flex justify-content-between p-1">
+        <button class="btn btn-sm btn-warning">Atualizar</button>
+        <button (click)="deleteObj()" class="btn btn-sm btn-danger">excluir</button>
+    </span>
+
+
+    <mat-grid-list cols="1" rowHeight="2:1">
+        <mat-grid-tile>imagem</mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile>
+            <mat-list class="p-1">
+                <li><strong>Jogo: </strong>{{data?.titulo ||'- - - - '}}</li>
+                <li> <strong>Lançamento: </strong>{{data?.lancamento |date:"dd/MM/yyy"}} </li>
+                <li><strong>Desenvolvedora: </strong>{{data?.desenvolvedora ||'- - - - '}}</li>
+                <li><strong>Descrição: </strong>{{data?.descricao ||'- - - - '}} </li>
+
+            </mat-list>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-card-content>
+                <h6>Categoria(s)</h6>
+                <mat-list>
+                    <li *ngFor="let obj of categorias">
+                        <strong>-{{obj.nome}}</strong>
+                    </li>
+                </mat-list>
+            </mat-card-content>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+
+</mat-card>

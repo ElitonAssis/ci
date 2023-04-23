@@ -1,11 +1,11 @@
-<mat-card class="w-100 h-100 bg-dark overflow-auto scrollable-div">
-    <mat-card-content *ngFor="let obj of listaGame |keyvalue ; let i = index " class="d-flex flex-column">
+<mat-card class="w-100 h-100  overflow-auto scrollable-div  grad">
+    <mat-card-content *ngFor="let obj of listaGame |keyvalue ; let i = index " class="d-flex flex-column mt-5">
         <h5 style="display: block;" class="text-white">{{obj.key|uppercase}}</h5>
-        <div class="d-flex flex-row overflow-auto ml-4 scrollable-div"
-            [style]="i%2==0? 'background-color:rgba(51, 51, 51, 1);':''">
-            <mat-card *ngFor="let item of obj?.value" class="shadow border rounded m-2 game-card pointer"
-                style="max-width: 25%;">
-                <mat-card-content (click)="openModal(item)">
+        <!-- [style]="i%2==0? 'background-color:rgba(51, 51, 51, 1);':''" -->
+        <div class="w-100 d-flex flex-row overflow-auto ml-4 scrollable-div ">
+            <mat-card *ngFor="let item of obj?.value" (click)="openModal(item)"
+                class="shadow border rounded m-2  pointer  col">
+                <mat-card-content class="game-card ">
                     <mat-card-header>
                         <mat-card-title-group>
                             <mat-card-title> {{item?.titulo||"- - - - -"}}</mat-card-title>
@@ -13,7 +13,9 @@
                         </mat-card-title-group>
                     </mat-card-header>
                     <mat-card-content>
-                        {{item?.descricao||"- - - - -"}}
+                        <small>
+                            {{item?.descricao||"- - - - -"}}
+                        </small>
                     </mat-card-content>
                     <mat-card-footer>
                         <mat-card-subtitle>

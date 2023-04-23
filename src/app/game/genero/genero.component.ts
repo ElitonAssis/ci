@@ -45,9 +45,12 @@ export class GeneroComponent implements OnInit {
 
   async getAll() {
     await this.service.getAll().then(res => {
+      console.log(res)
       res.subscribe(response => {
+
         console.log(response, 'getall')
         if (response.error) return;
+        console.log(typeof response)
         this.list = response;
       })
     })
@@ -67,5 +70,8 @@ export class GeneroComponent implements OnInit {
 
   includes(obj: GeneroIT): boolean { return this.ret.some(element => element.id === obj.id) }
 
-  close() { return this._bottomSheetRef.dismiss(this.ret) }
+  close() {
+    console.log(this.ret)
+    return this._bottomSheetRef.dismiss(this.ret)
+  }
 }

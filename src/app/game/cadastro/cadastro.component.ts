@@ -26,18 +26,16 @@ export class CadastroComponent implements OnInit {
   sendData() {
     if (this.formulario.invalid) return;
     if (new Date(this.formulario.value.lancamento as Date || new Date()).getDate().toLocaleString() === new Date().getDate().toLocaleString()) return console.log('data invalida')
-    console.log(this.formulario.value)
+    console.log({ ...this.formulario.value, ...this.game } as GameCadastro)
+    const game: GameCadastro = { ...this.formulario.value, ...this.game }
 
-    return this.gameService.sendData(this.formulario.value).then(res => {
-      debugger
-      console.log(res, 'res,1')
+    return this.gameService.sendData(game).then(res => {
       res.subscribe(response => {
         if (response.error) return console.log(response, 'erro')
         this.formulario.reset();
         return console.log(response, '2');
       })
     });
-
   }
 
   createForm() {
@@ -45,25 +43,30 @@ export class CadastroComponent implements OnInit {
       titulo: ['teste', [Validators.required, Validators.pattern(/^[^!@#$%¨&*]+$/)]],
       descricao: ['teste', [Validators.required, Validators.pattern(/^[^!@#$%¨&*]+$/)]],
       lancamento: [null, [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
-      genero: [[], Validators.required],
+      categoriaEntityList: [[], Validators.required],
       desenvolvedora: ['teste', [Validators.required, Validators.pattern(/^[^!@#$%¨&*]+$/)]]
     })
   }
   openBottomSheet(): void {
     this._bottomSheet.open(GeneroComponent).afterDismissed().subscribe(result => {
       if (result === undefined) return;
-      this.preencheFormGenero(result);
+
+      this.preencheFormGenero(this.clearArray(result));
     });
+  }
+  clearArray(array: Array<GeneroIT>): Array<GeneroIT> {
+
+    let form: Array<GeneroIT> = this.formulario.value?.categoriaEntityList;
+    form.forEach(obj => array.splice(array.findIndex(ele => ele.id === obj.id), 1));
+    return array;
   }
 
   private preencheFormGenero(array: Array<GeneroIT>) {
-    let form: Array<GeneroIT> = this.formulario.value?.genero;
-    form.forEach(obj => array.splice(array.findIndex(ele => ele.id === obj.id), 1));
-    return this.formulario.get('genero')?.setValue([...form, ...array]);
+    return this.formulario.get('categoriaEntityList')?.setValue([...this.formulario.value.categoriaEntityList, ...array]);
   }
 
   removeFromArray(i: number) {
-    this.formulario.value?.genero.splice(i, 1);
-    return this.formulario.get('genero')?.setValue(this.formulario.value?.genero);
+    this.formulario.value?.categoriaEntityList.splice(i, 1);
+    return this.formulario.get('categoriaEntityList')?.setValue(this.formulario.value?.categoriaEntityList);
   }
 }

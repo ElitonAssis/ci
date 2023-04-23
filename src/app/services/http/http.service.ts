@@ -12,7 +12,9 @@ export class HttpService {
   httpOpt = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Accept': 'application/json, */*'
+      'Accept': 'application/json, text/plain, */*'
+      // 'Accept': 'application/json, */*'
+
     })
   };
 

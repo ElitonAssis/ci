@@ -10,8 +10,9 @@ export class GameCadastro extends BaseModel {
     titulo?: string
     descricao?: string
     lancamento?: Date
-    genero?: Array<GeneroIT>
+    categoriaEntityList?: Set<GeneroIT>
     desenvolvedora?: string;
+    generos?: any
 }
 //• O cadastro de gêneros deve conter as seguintes informações: nome
 export interface GeneroIT extends BaseModel {

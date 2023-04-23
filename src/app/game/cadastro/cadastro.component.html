@@ -47,7 +47,7 @@
 
         </span>
         <mat-list>
-            <li *ngFor="let obj of formulario.value?.genero; let i = index"
+            <li *ngFor="let obj of formulario.value?.categoriaEntityList; let i = index"
                 class="border shadow mt-1 d-flex justify-content-between align-items-center p-2 h6">
                 <span>{{obj.nome}}</span>
                 <button (click)="removeFromArray(i);" class="btn btn-danger">x</button>

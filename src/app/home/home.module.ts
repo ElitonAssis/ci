@@ -20,7 +20,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     MaterialModule,
   ],
   exports: [
-    HomeComponent
+    SideBarComponent,
+    NavBarComponent
   ]
 })
 export class HomeModule { }

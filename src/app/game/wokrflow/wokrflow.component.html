@@ -1,0 +1,29 @@
+<mat-card class="w-100 vh-100 bg-dark ">
+    <mat-card-content *ngFor="let obj of listaGame |keyvalue ; let i = index " class="d-flex flex-column">
+        <h1 style="display: block;" class="text-white">{{obj.key|uppercase}}</h1>
+        <div class="d-flex flex-row overflow-auto ml-4 pointer">
+            <mat-card *ngFor="let item of obj?.value" class="shadow border rounded m-2">
+                <mat-card-content>
+                    <mat-card-header>
+                        <mat-card-title-group>
+                            <mat-card-title> {{item?.titulo||"- - - - -"}}</mat-card-title>
+                            <mat-card-subtitle>{{item?.desenvolvedora||"- - - - -"}}</mat-card-subtitle>
+                            <div></div>
+                        </mat-card-title-group>
+                    </mat-card-header>
+                    <mat-card-content>
+                        {{item?.descricao||"- - - - -"}}
+                    </mat-card-content>
+                    <mat-card-footer>
+                        <mat-card-subtitle>
+                            lançamento:{{item?.lancamento|date:"dd/MM/yyyy"}}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Desenvolvedora:{{item?.desenvolvedora||"- - - - -"}}
+                        </mat-card-subtitle>
+                    </mat-card-footer>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>

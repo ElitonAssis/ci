@@ -24,7 +24,7 @@ export class GameService implements OnInit, OnDestroy {
     return this.http.post(`/game/cadastro-jogo`, obj);
   }
 
-  async get() {
-    return this.http.get();
+  async getAll() {
+    return this.http.get("/game/get-all");
   }
 }

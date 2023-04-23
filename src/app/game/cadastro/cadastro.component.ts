@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GameCadastro, GeneroIT } from '../model/game';
 import { GameService } from 'src/app/services/game.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { GeneroComponent } from '../genero/genero.component';
-
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -13,13 +13,18 @@ import { GeneroComponent } from '../genero/genero.component';
 export class CadastroComponent implements OnInit {
   game = new GameCadastro();
   formulario!: FormGroup;
+
   constructor(
     private formbuilder: FormBuilder,
     private gameService: GameService,
-    private _bottomSheet: MatBottomSheet
+    private _bottomSheet: MatBottomSheet,
+    public dialogRef: MatDialogRef<CadastroComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+
   ) { }
 
   ngOnInit(): void {
+    console.log(this.data);
     this.createForm();
 
   }
@@ -69,4 +74,7 @@ export class CadastroComponent implements OnInit {
     this.formulario.value?.categoriaEntityList.splice(i, 1);
     return this.formulario.get('categoriaEntityList')?.setValue(this.formulario.value?.categoriaEntityList);
   }
+  // closeDialog() {
+  //   this.dialogRef.close('Fechou!');
+  // }
 }

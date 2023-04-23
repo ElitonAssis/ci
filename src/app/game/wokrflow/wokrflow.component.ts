@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { GameCadastro } from '../model/game';
+import { MatDialog } from '@angular/material/dialog';
 import { CadastroComponent } from '../cadastro/cadastro.component';
-
 @Component({
   selector: 'app-wokrflow',
   templateUrl: './wokrflow.component.html',
@@ -12,7 +12,8 @@ export class WokrflowComponent implements OnInit {
   gameList: Array<GameCadastro> = []
   listaGame!: Map<string, Array<GameCadastro>>;
   constructor(
-    private service: GameService
+    private service: GameService,
+    public dialog: MatDialog
   ) { }
   ngOnInit(): void {
     console.log('sdaaaaaaaaaaaaaaaaaaaaaaaaaa')
@@ -31,5 +32,13 @@ export class WokrflowComponent implements OnInit {
         console.log(this.listaGame);
       })
     })
+  }
+
+  openModal(obj: GameCadastro) {
+    return this.dialog.open(CadastroComponent, {
+      data: obj,
+      width: "80vw",
+      height: "80vh"
+    },)
   }
 }
